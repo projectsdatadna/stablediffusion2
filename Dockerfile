@@ -18,8 +18,11 @@ RUN apt-get update && apt-get install -y \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
 RUN update-alternatives --config python3
 
-# Create and activate virtual environment
+# Create /app directory
+RUN mkdir -p /app
 WORKDIR /app
+
+# Create and activate virtual environment
 RUN python3 -m venv venv
 ENV PATH="/app/venv/bin:$PATH"
 
