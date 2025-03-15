@@ -24,7 +24,7 @@ RUN python3 -m venv venv
 ENV PATH="/app/venv/bin:$PATH"
 
 # Clone Stable Diffusion 2 repository
-RUN git clone https://github.com/projectsdatadna/stablediffusion2.git /app/stablediffusion2
+RUN git clone --depth=1 https://github.com/projectsdatadna/stablediffusion2.git /app/stablediffusion2
 WORKDIR /app/stablediffusion2
 
 # Install Python dependencies
@@ -34,5 +34,5 @@ RUN pip install -r requirements.txt
 # Expose necessary ports
 EXPOSE 7860
 
-# Command to run Stable Diffusion
-CMD ["python", "scripts/txt2img.py", "--prompt", "a fantasy landscape", "--plms"]
+# Set entrypoint for RunPod compatibility
+ENTRYPOINT ["python", "scripts/txt2img.py", "--prompt", "a fantasy landscape", "--plms"]
